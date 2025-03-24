@@ -151,13 +151,70 @@ Pour signaler une vulnérabilité de sécurité, veuillez :
 - Mode performance pour les appareils moins puissants
 - Optimisation des assets
 
-## 🤝 Contribution
+## 🤝 Guide de Contribution
 
-1. Fork le projet
-2. Créer une branche pour votre fonctionnalité
-3. Commiter vos changements
-4. Pousser vers la branche
-5. Ouvrir une Pull Request
+### Processus de Contribution
+1. **Fork & Clone**
+   - Créez un fork du projet
+   - Clonez votre fork localement
+   ```bash
+   git clone [URL_DE_VOTRE_FORK]
+   cd visualisation-spatiale-domaines
+   ```
+
+2. **Branches**
+   - Créez une branche pour votre fonctionnalité
+   ```bash
+   git checkout -b feature/nom-de-la-feature
+   ```
+   - Utilisez des préfixes descriptifs :
+     - `feature/` pour les nouvelles fonctionnalités
+     - `fix/` pour les corrections de bugs
+     - `docs/` pour la documentation
+     - `refactor/` pour les refactorisations
+
+3. **Développement**
+   - Suivez les conventions de code existantes
+   - Commentez votre code quand nécessaire
+   - Testez vos modifications localement
+
+4. **Commit**
+   - Utilisez des messages de commit descriptifs
+   - Format recommandé :
+     ```
+     type(scope): description courte
+     
+     Description détaillée si nécessaire
+     ```
+   - Types : feat, fix, docs, style, refactor, test, chore
+
+5. **Pull Request**
+   - Poussez vos changements
+   - Créez une Pull Request vers la branche main
+   - Décrivez clairement vos modifications
+   - Référencez les issues concernées
+
+### Standards de Code
+- Indentation : 2 espaces
+- Nommage explicite des variables et fonctions
+- Composants React : PascalCase
+- Fichiers de style : camelCase
+- Tests : suffixe .test.js
+
+### Tests
+- Exécutez les tests avant de soumettre
+- Ajoutez des tests pour les nouvelles fonctionnalités
+- Vérifiez la couverture de code
+
+### Documentation
+- Mettez à jour le README si nécessaire
+- Documentez les nouvelles fonctionnalités
+- Ajoutez des commentaires JSDoc pour les fonctions complexes
+
+### Revue de Code
+- Répondez aux commentaires de revue
+- Soyez ouvert aux suggestions
+- Maintenez un ton professionnel et constructif
 
 ## 📄 Licence
 
