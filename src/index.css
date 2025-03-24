@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary-color: #0a0a2a;
+  --secondary-color: #3a3af0;
+  --accent-color: #f0a83a;
+  --text-color: #f0f0f0;
+  --background-gradient: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 100%);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--text-color);
+  background: var(--background-gradient);
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.interface {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.interface > * {
+  pointer-events: auto;
+}
+
+.domain-info {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  max-width: 30rem;
+  background: rgba(10, 10, 42, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.domain-info.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navigation {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-button {
+  background: rgba(58, 58, 240, 0.2);
+  border: 1px solid var(--secondary-color);
+  color: var(--text-color);
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.nav-button:hover {
+  background: rgba(58, 58, 240, 0.5);
+}
+
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 4px;
+  background: rgba(240, 240, 240, 0.2);
+  margin-top: 1rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.loading-progress {
+  height: 100%;
+  background: var(--accent-color);
+  transform-origin: left;
+  transform: scaleX(0);
+}
+
+@media (max-width: 768px) {
+  .domain-info {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    max-width: none;
+  }
+  
+  .navigation {
+    top: 1rem;
+    right: 1rem;
+  }
+} 
