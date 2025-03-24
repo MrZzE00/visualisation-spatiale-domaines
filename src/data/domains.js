@@ -840,4 +840,55 @@ export const mainDomains = [
   domains["role"]
 ]
 
+// Fonction pour mettre à jour le nom d'un domaine
+export const updateDomainName = (domainId, newName) => {
+  const domain = getDomainById(domainId);
+  if (domain) {
+    domain.name = newName;
+    
+    // Mettre également à jour les références à ce domaine dans les liens d'autres domaines
+    allDomains.forEach(d => {
+      if (d.links) {
+        d.links.forEach(link => {
+          if (link.id === domainId) {
+            link.name = newName;
+          }
+        });
+      }
+    });
+    
+    return true;
+  }
+  return false;
+};
+
+// Fonction pour mettre à jour un verbe de connexion
+export const updateConnectionVerb = (sourceId, targetId, newVerb) => {
+  const source = getDomainById(sourceId);
+  if (source && source.links) {
+    const linkIndex = source.links.findIndex(link => link.id === targetId);
+    if (linkIndex !== -1) {
+      source.links[linkIndex].verb = newVerb;
+      return true;
+    }
+  }
+  return false;
+};
+
+// Fonction générique pour mettre à jour les données
+export const updateDomainData = (action) => {
+  if (!action || !action.type) return false;
+  
+  switch (action.type) {
+    case 'updateDomainName':
+      return updateDomainName(action.domainId, action.newName);
+    
+    case 'updateVerb':
+      return updateConnectionVerb(action.sourceId, action.targetId, action.newVerb);
+    
+    default:
+      return false;
+  }
+};
+
 export default domains 

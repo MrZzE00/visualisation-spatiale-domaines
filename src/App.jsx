@@ -22,7 +22,7 @@ import SpaceScene from './components/SpaceScene'
 import DomainInfo from './components/DomainInfo'
 import Navigation from './components/Navigation'
 import LoadingScreen from './components/LoadingScreen'
-import { mainDomains, getDomainById } from './data/domains'
+import { mainDomains, getDomainById, updateDomainData } from './data/domains'
 import { gsap } from 'gsap'
 import './index.css'
 
@@ -188,6 +188,26 @@ const App = () => {
     setHoveredDomain(domain)
   }, [])
 
+  // Gérer les modifications de données (noms de domaines, verbes, etc.)
+  const handleDataChange = useCallback((action) => {
+    // Appliquer la modification
+    const success = updateDomainData(action);
+    
+    // Si la modification est réussie, forcer une mise à jour de l'interface
+    if (success) {
+      // Si on modifie le domaine actif, mettre à jour l'état pour forcer le rendu
+      if (action.type === 'updateDomainName' && activeDomain?.id === action.domainId) {
+        const updatedDomain = getDomainById(action.domainId);
+        setActiveDomain({ ...updatedDomain });
+      }
+      
+      // Pour le mode débogage, on peut ajouter un message de confirmation
+      if (import.meta.env.DEV) {
+        console.log('Modification appliquée:', action);
+      }
+    }
+  }, [activeDomain]);
+
   return (
     <div className="app">
       {isLoading ? (
@@ -240,6 +260,7 @@ const App = () => {
                     activeDomain={activeDomain}
                     hoveredDomain={hoveredDomain}
                     performanceMode={performanceMode}
+                    onDataChange={handleDataChange}
                   />
                   <Stars radius={100} depth={50} count={isSceneVisible ? (performanceMode ? 1000 : 1500) : 0} factor={4} saturation={0.5} fade speed={0.5} />
                   
@@ -271,6 +292,7 @@ const App = () => {
             domain={activeDomain} 
             isOpen={isInfoOpen} 
             onClose={handleCloseInfo}
+            onDataChange={handleDataChange}
           />
           
           {/* Navigation */}
@@ -283,7 +305,7 @@ const App = () => {
           />
           
           {/* Aide contextuelle */}
-          <div className="absolute bottom-0 left-0 text-[8px] text-white/60 bg-blue-900/20 p-0.5 backdrop-blur-sm">
+          <div className="absolute bottom-0 left-0 text-xs sm:text-sm text-white/60 bg-blue-900/20 p-1.5 sm:p-2 backdrop-blur-sm rounded-tr-lg border-t border-r border-white/10">
             <p className="leading-tight">
               Souris: navigation | Clic: explorer
               {!performanceMode && " | 🚀: performance"}
@@ -291,8 +313,8 @@ const App = () => {
           </div>
           
           {/* Crédit */}
-          <div className="absolute bottom-0 right-0 text-[8px] text-white/60 bg-blue-900/20 p-0.5 backdrop-blur-sm">
-            © 2023 SAFe
+          <div className="absolute bottom-0 right-0 text-xs sm:text-sm text-white/60 bg-blue-900/20 p-1.5 sm:p-2 backdrop-blur-sm rounded-tl-lg border-t border-l border-white/10">
+            © 2025 MrZzE00 - SAFe Visualisation
           </div>
         </>
       )}

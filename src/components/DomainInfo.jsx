@@ -1,7 +1,62 @@
 import React, { useEffect, useState } from 'react'
 import { getLinkedDomains, getChildDomains } from '../data/domains'
 
-const DomainInfo = ({ domain, isOpen, onClose }) => {
+// Composant d'édition de texte
+const EditableText = ({ text, onTextChange, textType = 'text' }) => {
+  const [isEditing, setIsEditing] = useState(false)
+  const [editedText, setEditedText] = useState(text)
+  const inputRef = React.useRef(null)
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [isEditing])
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onTextChange(editedText)
+      setIsEditing(false)
+      e.preventDefault()
+    } else if (e.key === 'Escape') {
+      setEditedText(text)
+      setIsEditing(false)
+      e.preventDefault()
+    }
+  }
+
+  const handleBlur = () => {
+    onTextChange(editedText)
+    setIsEditing(false)
+  }
+
+  return (
+    <span className="inline-block">
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          type="text"
+          value={editedText}
+          onChange={(e) => setEditedText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={handleBlur}
+          className="bg-gray-800 text-white px-2 py-0.5 rounded border border-blue-500 focus:outline-none focus:border-blue-600"
+          style={{ minWidth: textType === 'verb' ? '80px' : '120px' }}
+        />
+      ) : (
+        <span
+          onClick={() => setIsEditing(true)}
+          className="cursor-pointer hover:text-blue-400 transition-colors"
+          title="Cliquer pour modifier"
+        >
+          {text}
+        </span>
+      )}
+    </span>
+  )
+}
+
+const DomainInfo = ({ domain, isOpen, onClose, onDataChange }) => {
   const [activeTab, setActiveTab] = useState('description')
   const [relatedDomains, setRelatedDomains] = useState([])
   const [childDomains, setChildDomains] = useState([])
@@ -219,7 +274,29 @@ const DomainInfo = ({ domain, isOpen, onClose }) => {
                       <div className="flex-1">
                         <div className="font-medium">{link.name}</div>
                         <div className="text-xs text-gray-400 mt-1">
-                          {domain.name} <span className="text-blue-400">{link.verb}</span> {link.name}
+                          <div className="flex justify-between items-center">
+                            <div>
+                              {domain.name} <span className="text-blue-400">{link.verb}</span> {link.name}
+                            </div>
+                            <button
+                              onClick={() => {
+                                if (onDataChange) {
+                                  const newVerb = prompt('Modifier le verbe:', link.verb)
+                                  if (newVerb && newVerb !== link.verb) {
+                                    onDataChange({
+                                      type: 'updateVerb',
+                                      sourceId: domain.id,
+                                      targetId: link.id,
+                                      newVerb
+                                    })
+                                  }
+                                }
+                              }}
+                              className="text-blue-400 hover:text-blue-300 text-xs underline transition-colors ml-2"
+                            >
+                              Modifier
+                            </button>
+                          </div>
                         </div>
                       </div>
                       <svg 
@@ -256,9 +333,32 @@ const DomainInfo = ({ domain, isOpen, onClose }) => {
                       <div className="flex-1">
                         <div className="font-medium">{relatedDomain.name}</div>
                         <div className="text-xs text-gray-400 mt-1">
-                          {relatedDomain.name} <span className="text-blue-400">
-                            {relatedDomain.links?.find(link => link.id === domain.id)?.verb || 'connecté à'}
-                          </span> {domain.name}
+                          <div className="flex justify-between items-center">
+                            <div>
+                              {relatedDomain.name} <span className="text-blue-400">
+                                {relatedDomain.links?.find(link => link.id === domain.id)?.verb || 'connecté à'}
+                              </span> {domain.name}
+                            </div>
+                            <button
+                              onClick={() => {
+                                if (onDataChange) {
+                                  const currentVerb = relatedDomain.links?.find(link => link.id === domain.id)?.verb || 'connecté à'
+                                  const newVerb = prompt('Modifier le verbe:', currentVerb)
+                                  if (newVerb && newVerb !== currentVerb) {
+                                    onDataChange({
+                                      type: 'updateVerb',
+                                      sourceId: relatedDomain.id,
+                                      targetId: domain.id,
+                                      newVerb
+                                    })
+                                  }
+                                }
+                              }}
+                              className="text-blue-400 hover:text-blue-300 text-xs underline transition-colors ml-2"
+                            >
+                              Modifier
+                            </button>
+                          </div>
                         </div>
                       </div>
                       <svg 

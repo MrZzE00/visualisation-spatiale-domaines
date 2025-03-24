@@ -40,7 +40,7 @@ const Navigation = ({ domains, activeDomain, onDomainSelect, onDomainHover, onRe
     <div className="fixed left-4 top-4 z-50">
       <div 
         className={`bg-black/80 backdrop-blur-md border border-gray-700 rounded-lg text-white overflow-hidden transition-all duration-300 ${
-          isExpanded ? 'w-64' : 'w-12'
+          isExpanded ? 'w-64 md:w-80' : 'w-12'
         }`}
       >
         {/* Bouton d'ouverture/fermeture */}
@@ -48,7 +48,16 @@ const Navigation = ({ domains, activeDomain, onDomainSelect, onDomainHover, onRe
           onClick={() => setIsExpanded(!isExpanded)}
           className="w-12 h-12 flex items-center justify-center text-white hover:bg-gray-800 transition-colors"
         >
-          <span className="text-xl">{isExpanded ? '✕' : '≡'}</span>
+          <div className="flex flex-col justify-center items-center gap-1.5">
+            <span className="text-2xl leading-none">{isExpanded ? '✕' : '≡'}</span>
+            {!isExpanded && (
+              <div className="flex flex-col gap-1">
+                <div className="w-4 h-0.5 bg-white"></div>
+                <div className="w-4 h-0.5 bg-white"></div>
+                <div className="w-4 h-0.5 bg-white"></div>
+              </div>
+            )}
+          </div>
         </button>
         
         {/* Contenu du panneau */}
@@ -138,7 +147,7 @@ const DomainButton = ({ domain, isActive, onDomainSelect, onMouseEnter, onMouseL
           className="w-2 h-2 rounded-full" 
           style={{ backgroundColor: domain.color || '#ffffff' }}
         />
-        {domain.name}
+        <span className="truncate">{domain.name}</span>
       </button>
     </li>
   )

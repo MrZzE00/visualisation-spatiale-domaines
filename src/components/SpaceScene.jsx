@@ -1,16 +1,79 @@
-import React, { useRef, useState, useEffect, useMemo } from 'react'
+import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
 import { useFrame, useThree } from '@react-three/fiber'
 import { Text, Line, Html, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { gsap } from 'gsap'
-import { allDomains, getLinkedDomains, getChildDomains, getDomainById, getAllRelatedDomains } from '../data/domains'
+import { allDomains, getLinkedDomains, getChildDomains, getDomainById, getAllRelatedDomains, updateDomainData } from '../data/domains'
 import { SpaceBackground } from './SpaceBackground'
 
+// Composant d'édition de texte
+const EditableText = ({ text, onTextChange, isEditing, setIsEditing, textType, fontSize = 'text-xs' }) => {
+  const [editedText, setEditedText] = useState(text)
+  const inputRef = useRef(null)
+  
+  // Focus sur l'input quand on entre en mode édition
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [isEditing])
+  
+  // Gestion des touches spéciales
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      onTextChange(editedText)
+      setIsEditing(false)
+      e.preventDefault()
+    } else if (e.key === 'Escape') {
+      setEditedText(text) // Restaurer le texte original
+      setIsEditing(false)
+      e.preventDefault()
+    }
+  }
+  
+  const handleClickOutside = () => {
+    if (isEditing) {
+      onTextChange(editedText)
+      setIsEditing(false)
+    }
+  }
+  
+  return (
+    <div 
+      className={`relative ${isEditing ? 'z-50' : ''}`}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          type="text"
+          value={editedText}
+          onChange={(e) => setEditedText(e.target.value)}
+          onKeyDown={handleKeyDown}
+          onBlur={handleClickOutside}
+          className={`bg-gray-800 text-white px-2 py-0.5 rounded-md border border-blue-400 outline-none ${fontSize}`}
+          style={{ minWidth: textType === 'domain' ? '100px' : '60px' }}
+          autoFocus
+        />
+      ) : (
+        <span 
+          className="cursor-pointer"
+          onClick={() => setIsEditing(true)}
+          title="Cliquez pour modifier"
+        >
+          {text}
+        </span>
+      )}
+    </div>
+  )
+}
+
 // Planète représentant un domaine avec texture réaliste
-const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanceMode }) => {
+const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanceMode, onDomainNameChange }) => {
   const groupRef = useRef()
   const meshRef = useRef()
   const [hovered, setHovered] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const isHovered = hovered || (hoveredDomain && hoveredDomain.id === domain.id)
   const isActive = active && active.id === domain.id
   
@@ -19,80 +82,34 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
   // Taille basée sur l'importance du domaine
   const size = domain.parentId ? (domain.size || 0.5) * 0.5 : domain.size || 1
   
-  // Générer des paramètres d'orbite aléatoires mais stables pour chaque domaine
-  const orbitParams = useMemo(() => {
-    // Utiliser une seed basée sur l'ID du domaine pour une cohérence entre les rendus
-    const seed = domain.id.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0)
-    
-    // Fonction pseudo-aléatoire basée sur la seed
-    const random = (min, max) => {
-      const x = Math.sin(seed * 9999) * 10000
-      const result = (x - Math.floor(x)) * (max - min) + min
-      return result
-    }
-    
-    return {
-      // Vélocité orbitale unique pour chaque satellite
-      speed: random(0.03, 0.08),
-      // Phase de départ unique pour éviter les grappes
-      phaseOffset: random(0, Math.PI * 2),
-      // Inclinaison de l'orbite
-      inclination: random(-0.3, 0.3),
-      // Distance orbitale variable - réduite pour que les satellites restent proches
-      distance: random(1.2, 1.6) * (domain.parentId ? 2.0 : size * 2),
-      // Excentricité pour des orbites plus ou moins elliptiques
-      eccentricity: random(0, 0.2)
-    }
-  }, [domain.id, size, domain.parentId])
+  // Segments réduits en mode performance
+  const segments = performanceMode ? 16 : 32
   
-  // Animation et effets
+  // Gestion du changement de nom du domaine
+  const handleNameChange = (newName) => {
+    if (newName !== domain.name) {
+      onDomainNameChange(domain.id, newName)
+    }
+  }
+  
+  // Animation de survol
   useEffect(() => {
     if (meshRef.current) {
-      // Animation d'échelle en fonction du survol
       gsap.to(meshRef.current.scale, {
-        x: isHovered ? 1.1 : 1,
-        y: isHovered ? 1.1 : 1,
-        z: isHovered ? 1.1 : 1,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.7)'
+        x: isHovered ? 1.05 : 1,
+        y: isHovered ? 1.05 : 1,
+        z: isHovered ? 1.05 : 1,
+        duration: 0.3
       })
     }
   }, [isHovered])
   
-  // Animation de rotation continue
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.001 * domain.size * delta * 15 // Vitesse réduite
-    }
-    if (groupRef.current && domain.parentId) {
-      // Orbite autour du parent
-      const parent = getDomainById(domain.parentId)
-      if (parent) {
-        const time = state.clock.getElapsedTime()
-        
-        // Utiliser les paramètres d'orbite pour calculer la position
-        const orbitSpeed = orbitParams.speed
-        const phaseOffset = orbitParams.phaseOffset
-        const angle = time * orbitSpeed + phaseOffset
-        
-        // Appliquer l'excentricité pour des orbites elliptiques
-        const distance = orbitParams.distance * (1 + orbitParams.eccentricity * Math.cos(angle))
-        
-        // Calculer la position en 3D avec inclinaison
-        const orbitX = Math.cos(angle) * distance
-        const orbitY = Math.sin(orbitParams.inclination * Math.PI) * Math.sin(angle) * distance * 0.4
-        const orbitZ = Math.sin(angle) * distance
-        
-        // Positionner le satellite autour du parent
-        groupRef.current.position.x = parent.position[0] + orbitX
-        groupRef.current.position.y = parent.position[1] + orbitY
-        groupRef.current.position.z = parent.position[2] + orbitZ
-      }
+  // Rotation lente de la planète
+  useFrame(() => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.001
     }
   })
-  
-  // Déterminer la qualité de la géométrie en fonction du mode performance
-  const segments = performanceMode ? 16 : 32
   
   return (
     <group 
@@ -102,9 +119,29 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
       {/* Sphère représentant la planète */}
       <mesh
         ref={meshRef}
-        onClick={() => onDomainClick(domain)}
+        onClick={() => {
+          if (!isEditing) {
+            onDomainClick(domain)
+          }
+        }}
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
+        onPointerDown={(e) => {
+          // Empêcher le comportement par défaut du navigateur sur mobile
+          e.stopPropagation()
+        }}
+        onPointerUp={(e) => {
+          // Empêcher le comportement par défaut du navigateur sur mobile
+          e.stopPropagation()
+        }}
+        onTouchStart={(e) => {
+          // Empêcher le comportement par défaut du navigateur sur mobile
+          e.stopPropagation()
+        }}
+        onTouchEnd={(e) => {
+          // Empêcher le comportement par défaut du navigateur sur mobile
+          e.stopPropagation()
+        }}
         receiveShadow={!performanceMode}
         castShadow={!performanceMode}
       >
@@ -132,7 +169,7 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
       <Html
         position={[0, size * 2.6, 0]}
         center
-        className="pointer-events-none"
+        className="pointer-events-auto"
         transform
         occlude={false}
         distanceFactor={10}
@@ -148,7 +185,8 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
           rounded-md
           whitespace-nowrap
           transition-all duration-300
-          text-xs
+          text-xs sm:text-sm
+          max-w-[120px] sm:max-w-[150px]
           ${isHovered || isActive ? 'scale-110' : ''}
         `}
         style={{
@@ -159,7 +197,13 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
           borderColor: isHovered || isActive ? "#ffffff" : color
         }}
         >
-          {domain.name}
+          <EditableText 
+            text={domain.name} 
+            onTextChange={handleNameChange} 
+            isEditing={isEditing} 
+            setIsEditing={setIsEditing}
+            textType="domain"
+          />
           {/* Petit triangle en bas de la bulle */}
           <div 
             className="absolute left-1/2 -bottom-1 w-2 h-2 bg-gray-800/90 border-b border-r border-gray-500"
@@ -188,9 +232,10 @@ const DomainPlanet = ({ domain, onDomainClick, active, hoveredDomain, performanc
 }
 
 // Composant de connexion entre deux domaines
-const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlight }) => {
+const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlight, onVerbChange }) => {
   const startRef = useRef()
   const endRef = useRef()
+  const [isEditing, setIsEditing] = useState(false)
   const points = useMemo(() => {
     const start = new THREE.Vector3(...source.position)
     const end = new THREE.Vector3(...target.position)
@@ -245,6 +290,13 @@ const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlig
     }
   }, [isHighlighted])
   
+  // Gestion du changement du verbe de connexion
+  const handleVerbChange = (newVerb) => {
+    if (newVerb !== verb) {
+      onVerbChange(source.id, target.id, newVerb)
+    }
+  }
+  
   return (
     <group>
       {/* Ligne reliant les domaines */}
@@ -276,13 +328,14 @@ const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlig
       </mesh>
       
       {/* Étiquette de la relation */}
-      {isHighlighted && verb && (
+      {(isHighlighted || isEditing) && (
         <Html
           position={points[Math.floor(points.length / 2)]}
           center
           distanceFactor={15}
           sprite
           occlude={false}
+          className="pointer-events-auto"
         >
           <div className="px-2 py-0.5 bg-gray-900/90 text-white text-xs rounded-md whitespace-nowrap border border-gray-500"
             style={{
@@ -290,7 +343,13 @@ const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlig
               boxShadow: "0 2px 5px rgba(0,0,0,0.5)"
             }}
           >
-            {verb}
+            <EditableText 
+              text={verb || 'connecté à'} 
+              onTextChange={handleVerbChange} 
+              isEditing={isEditing} 
+              setIsEditing={setIsEditing}
+              textType="verb"
+            />
           </div>
         </Html>
       )}
@@ -299,7 +358,7 @@ const DomainConnection = ({ source, target, verb, active, hoveredDomain, highlig
 }
 
 // Composant principal de la scène
-const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMode }) => {
+const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMode, onDataChange }) => {
   const { camera } = useThree()
   const [isZoomedOut, setIsZoomedOut] = useState(false)
   const cameraRef = useRef(camera)
@@ -366,6 +425,29 @@ const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMod
     return connections
   }, [visibleDomains])
   
+  // Gestionnaire de changement de nom de domaine
+  const handleDomainNameChange = (domainId, newName) => {
+    if (onDataChange) {
+      onDataChange({ 
+        type: 'updateDomainName', 
+        domainId, 
+        newName 
+      })
+    }
+  }
+  
+  // Gestionnaire de changement de verbe
+  const handleVerbChange = (sourceId, targetId, newVerb) => {
+    if (onDataChange) {
+      onDataChange({ 
+        type: 'updateVerb', 
+        sourceId, 
+        targetId, 
+        newVerb 
+      })
+    }
+  }
+  
   // Fonction pour gérer le zoom out
   const handleZoomOut = (domain) => {
     if (!domain) return
@@ -428,16 +510,17 @@ const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMod
     })
   }
   
-  // Gérer le clic sur un domaine
-  const handleDomainClick = (domain) => {
-    // Gérer le mode zoom out
-    if (!isZoomedOut) {
-      handleZoomOut(domain)
-    } else {
-      // Si déjà en mode zoom out, simplement notifier le parent
-      onDomainClick(domain, false)
+  // Gestion du clic sur un domaine
+  const handleDomainClick = useCallback((domain) => {
+    if (onDomainClick) {
+      if (domain.id === activeDomain?.id) {
+        // Si on clique sur le domaine déjà actif, on passe en vue étendue
+        handleZoomOut(domain)
+      } else {
+        onDomainClick(domain)
+      }
     }
-  }
+  }, [onDomainClick, activeDomain])
   
   // Réinitialiser la position de la caméra lorsque l'on quitte le mode zoom out
   useEffect(() => {
@@ -488,6 +571,7 @@ const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMod
           active={activeDomain}
           hoveredDomain={hoveredDomain}
           performanceMode={performanceMode}
+          onDomainNameChange={handleDomainNameChange}
         />
       ))}
       
@@ -501,6 +585,7 @@ const SpaceScene = ({ onDomainClick, activeDomain, hoveredDomain, performanceMod
           active={activeDomain}
           hoveredDomain={hoveredDomain}
           highlight={activeDomain && activeDomain.id === connection.source.id && hoveredDomain && hoveredDomain.id === connection.target.id}
+          onVerbChange={handleVerbChange}
         />
       ))}
       

@@ -1,0 +1,194 @@
+Domaine Principal,Type,Description,Sous-domaine,Type Sous-domaine,Description Sous-domaine,Verbe de liaison,Informations détaillées
+
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,Espaces de collaboration d'échange et de partage de connaissances entre les équipes.,Collaboration & Knowledge Sharing,Sous-domaine de SQUAD,Facilitation du partage de connaissances et d'expertise entre les équipes.,is part of,
+"1. Communautés de pratique: Créer des espaces d'échange pour mutualiser l'expertise et diffuser les innovations à travers l'organisation.
+2. Mentorat et pair programming: Favoriser l'accompagnement mutuel et le transfert de savoir-faire au sein des équipes.
+3. Transversalité des projets: Encourager la coopération entre différents Squads métiers et fonctions pour enrichir les perspectives.
+4. Sessions de partage: Organiser régulièrement des présentations brown bag lunches ou démos pour valoriser le travail accompli et partager les apprentissages.
+5. Plateformes collaboratives: Mettre à disposition des outils (wikis bases de connaissances forums) pour centraliser la documentation et encourager l'entraide."
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,Espaces de collaboration d'échange et de partage de connaissances entre les équipes.,CONTINUOUS IMPROVEMENT,Sous-domaine de SQUAD,Amélioration progressive des processus méthodes et pratiques.,is part of,"1. Boucles de feedback régulières: Permettre aux équipes de partager et d'intégrer les retours en continu pour affiner les processus.
+2. Culture de la rétroaction: Encourager les Rétrospectives les bilans post-projets et l'analyse des erreurs pour progresser.
+3. Évaluation constante des pratiques: Suivre des indicateurs de performance et ajuster les méthodes de travail en temps réel.
+4. Amélioration progressive des process: Mettre à jour les standards et routines dès qu'une piste d'optimisation est identifiée.
+5. Adaptation rapide au changement: Instaurer un climat de souplesse où les nouvelles idées sont testées et ajustées sans lourdeur."
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,Espaces de collaboration d'échange et de partage de connaissances entre les équipes.,INNOVATION IDEAS,Sous-domaine de SQUAD,Exploration et expérimentation de nouvelles approches et technologies.,is part of,"1. Veille technologique active: Rester à l'affût des nouvelles tendances et outils pour anticiper les évolutions du marché.
+2. Expérimentations et POC: Lancer des prototypes ou pilotes pour valider rapidement la faisabilité et la valeur d'une idée.
+3. Sessions créatives: Organiser des hackathons design sprints ou ateliers d'idéation pour stimuler la créativité collective.
+4. Capitalisation des découvertes: Documenter et partager les enseignements tirés de chaque expérimentation afin de nourrir la culture d'innovation.
+5. Promotion de l'intrapreneuriat: Encourager les collaborateurs à proposer et à porter leurs projets soutenus par les communautés expertes."
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,Espaces de collaboration d'échange et de partage de connaissances entre les équipes.,GUIDELINES,Sous-domaine de SQUAD,Normes et standards qui encadrent les pratiques des équipes.,is part of,"1. Standardisation des pratiques: Définir des référentiels communs (ex. : conventions de code checklist de tests) pour garantir la cohérence.
+2. Documentation évolutive: Mettre à disposition des guides clairs et régulièrement mis à jour pour faciliter l'onboarding et la montée en compétences.
+3. Référentiels de qualité: Établir des critères partagés pour valider la robustesse et la maintenabilité des livrables.
+4. Transmission de bonnes pratiques: Formaliser les patterns méthodologies et principes clés qui font la force de l'organisation.
+5. Simplicité et clarté: Veiller à ce que les directives soient faciles à comprendre et à appliquer pour éviter la lourdeur administrative."
+
+GEM,Domaine Principal,Valeurs et principes fondamentaux qui guident les pratiques agiles.,CONTINUOUS IMPROVEMENT,Sous-domaine de GEM,Principe d'amélioration continue dans la démarche agile.,is_a,"1. Amélioration continue: Identifier et mettre en œuvre des améliorations de manière itérative.
+2. Mesure et métriques: Définir et suivre des indicateurs pertinents pour évaluer les progrès.
+3. Retours d'expérience: Organiser des sessions régulières pour partager les apprentissages.
+4. Expérimentation: Tester de nouvelles approches et méthodes de travail.
+5. Culture d'excellence: Promouvoir une mentalité d'amélioration constante."
+GEM,Domaine Principal,Valeurs et principes fondamentaux qui guident les pratiques agiles.,TRANSPARENCY,Sous-domaine de GEM,Principe de transparence dans les informations et les processus.,is_a,"1. Communication ouverte: Favoriser le partage d'information à tous les niveaux.
+2. Visibilité: Rendre les processus et décisions visibles et compréhensibles.
+3. Accessibilité: Garantir l'accès aux informations pertinentes.
+4. Feedback: Encourager les retours constructifs et la communication bidirectionnelle.
+5. Documentation: Maintenir une documentation claire et à jour."
+GEM,Domaine Principal,Valeurs et principes fondamentaux qui guident les pratiques agiles.,EMPOWERMENT,Sous-domaine de GEM,Principe d'autonomisation et de responsabilisation des équipes.,is_a,"1. Autonomie: Donner aux équipes le pouvoir de prendre des décisions.
+2. Responsabilisation: Confier des responsabilités claires aux membres de l'équipe.
+3. Formation: Développer les compétences et l'expertise des équipes.
+4. Support: Fournir les ressources et le soutien nécessaires.
+5. Confiance: Établir un climat de confiance et de respect mutuel."
+
+ROLE,Domaine Principal,Rôles spécifiques associés aux méthodologies agiles.,PRODUCT OWNER,Sous-domaine de ROLE,Responsable de la définition et de la priorisation du backlog produit.,is_a,"1. Vision produit: Définir et communiquer la vision du produit.
+2. Priorisation: Gérer et prioriser le backlog produit.
+3. Stakeholders: Interagir avec les parties prenantes.
+4. Valeur: Maximiser la valeur délivrée aux utilisateurs.
+5. Décisions: Prendre les décisions concernant le produit."
+ROLE,Domaine Principal,Rôles spécifiques associés aux méthodologies agiles.,SCRUM MASTER,Sous-domaine de ROLE,Facilitateur qui aide l'équipe à appliquer les principes Scrum.,is_a,"1. Facilitation: Animer les cérémonies et faciliter les interactions.
+2. Coaching: Accompagner l'équipe dans l'adoption des pratiques agiles.
+3. Obstacles: Identifier et aider à résoudre les obstacles.
+4. Amélioration: Promouvoir l'amélioration continue.
+5. Protection: Protéger l'équipe des perturbations externes."
+ROLE,Domaine Principal,Rôles spécifiques associés aux méthodologies agiles.,DEVELOPER,Sous-domaine de ROLE,Membre de l'équipe qui développe teste et déploie les fonctionnalités.,is_a,"1. Développement: Créer des fonctionnalités de qualité.
+2. Tests: Assurer la qualité du code et des fonctionnalités.
+3. Collaboration: Travailler en équipe et partager les connaissances.
+4. Innovation: Proposer des solutions techniques innovantes.
+5. Maintenance: Maintenir et améliorer le code existant."
+ROLE,Domaine Principal,Rôles spécifiques associés aux méthodologies agiles.,ARCHITECT,Sous-domaine de ROLE,Responsable de la structure technique et des choix architecturaux.,is_a,"1. Architecture: Concevoir l'architecture technique.
+2. Standards: Définir les standards et bonnes pratiques.
+3. Évolution: Planifier l'évolution technique.
+4. Support: Accompagner les équipes sur les aspects techniques.
+5. Veille: Assurer une veille technologique."
+
+RITUAL,Domaine Principal,Cérémonies et événements récurrents qui structurent la méthodologie agile.,DAILY STANDUP,Sous-domaine de RITUAL,Réunion quotidienne de synchronisation de l'équipe.,participates in,"1. Synchronisation: Partager l'avancement quotidien.
+2. Obstacles: Identifier les blocages rapidement.
+3. Collaboration: Favoriser l'entraide dans l'équipe.
+4. Focus: Maintenir l'alignement sur les objectifs.
+5. Communication: Assurer une communication efficace."
+RITUAL,Domaine Principal,Cérémonies et événements récurrents qui structurent la méthodologie agile.,SPRINT PLANNING,Sous-domaine de RITUAL,Planification du travail à réaliser pendant le sprint.,participates in,"1. Objectifs: Définir les objectifs du sprint.
+2. Estimation: Estimer la charge de travail.
+3. Engagement: S'engager sur les livrables.
+4. Clarification: Clarifier les exigences.
+5. Organisation: Planifier le travail d'équipe."
+RITUAL,Domaine Principal,Cérémonies et événements récurrents qui structurent la méthodologie agile.,REVIEW,Sous-domaine de RITUAL,Présentation des fonctionnalités développées pendant le sprint.,participates in,"1. Démonstration: Présenter les fonctionnalités réalisées.
+2. Feedback: Recueillir les retours des parties prenantes.
+3. Validation: Valider l'adéquation avec les besoins.
+4. Adaptation: Ajuster les priorités si nécessaire.
+5. Transparence: Montrer l'avancement du produit."
+RITUAL,Domaine Principal,Cérémonies et événements récurrents qui structurent la méthodologie agile.,PI PLANNING,Sous-domaine de RITUAL,Planification des incréments de programme (Program Increment).,participates in,"1. Vision: Aligner les équipes sur la vision.
+2. Planification: Définir les objectifs du PI.
+3. Dépendances: Identifier les dépendances entre équipes.
+4. Risques: Anticiper et gérer les risques.
+5. Coordination: Coordonner le travail des équipes."
+RITUAL,Domaine Principal,Cérémonies et événements récurrents qui structurent la méthodologie agile.,RETROSPECTIVE,Sous-domaine de RITUAL,Analyse du processus de travail pour identifier des améliorations.,participates in,"1. Analyse: Examiner le sprint passé.
+2. Améliorations: Identifier les axes d'amélioration.
+3. Actions: Définir des actions concrètes.
+4. Suivi: Suivre la mise en œuvre des actions.
+5. Apprentissage: Capitaliser sur les expériences."
+
+ARTEFACT,Domaine Principal,Documents et outils utilisés dans le cadre de la méthodologie agile.,PI Objectives,Sous-domaine d'ARTEFACT,Objectifs définis pour un incrément de programme.,contributes to,"1. Définition: Formuler des objectifs SMART.
+2. Alignement: Assurer l'alignement avec la vision.
+3. Mesure: Définir les critères de succès.
+4. Priorisation: Hiérarchiser les objectifs.
+5. Communication: Partager les objectifs avec les équipes."
+ARTEFACT,Domaine Principal,Documents et outils utilisés dans le cadre de la méthodologie agile.,Backlogs,Sous-domaine d'ARTEFACT,Listes d'éléments de travail (produit sprint programme).,contributes to,"1. Gestion: Organiser et maintenir les backlogs.
+2. Priorisation: Ordonner les éléments par valeur.
+3. Raffinement: Affiner les items régulièrement.
+4. Estimation: Évaluer la complexité des items.
+5. Visibilité: Rendre le backlog accessible à tous."
+ARTEFACT,Domaine Principal,Documents et outils utilisés dans le cadre de la méthodologie agile.,Kanban Board,Sous-domaine d'ARTEFACT,Représentation visuelle du flux de travail.,contributes to,"1. Visualisation: Représenter le flux de travail.
+2. Limites: Gérer les limites de travail en cours.
+3. Flux: Optimiser le flux de valeur.
+4. Métriques: Suivre les indicateurs clés.
+5. Amélioration: Identifier les goulots d'étranglement."
+ARTEFACT,Domaine Principal,Documents et outils utilisés dans le cadre de la méthodologie agile.,Documentation technique,Sous-domaine d'ARTEFACT,Documents techniques et guides de conception.,contributes to,"1. Architecture: Documenter les choix techniques.
+2. Standards: Définir les conventions de code.
+3. Guides: Créer des guides d'utilisation.
+4. Maintenance: Maintenir la documentation à jour.
+5. Accessibilité: Rendre la documentation accessible."
+ARTEFACT,Domaine Principal,Documents et outils utilisés dans le cadre de la méthodologie agile.,User Stories,Sous-domaine d'ARTEFACT,Descriptions des fonctionnalités du point de vue utilisateur.,contributes to,"1. Rédaction: Écrire des stories claires et concises.
+2. Critères: Définir les critères d'acceptation.
+3. Valeur: Identifier la valeur métier.
+4. Granularité: Maintenir une taille appropriée.
+5. Validation: Vérifier la compréhension commune."
+
+N TEAMS,Domaine Principal,Équipes opérationnelles qui exécutent le travail en utilisant des méthodes agiles.,Feature Team,Sous-domaine de N TEAMS,Équipe pluridisciplinaire qui travaille sur des fonctionnalités de bout en bout.,part of,"1. Autonomie: Travailler de manière autonome.
+2. Polyvalence: Développer des compétences variées.
+3. Collaboration: Favoriser le travail d'équipe.
+4. Livraison: Délivrer des fonctionnalités complètes.
+5. Qualité: Assurer la qualité des livrables."
+N TEAMS,Domaine Principal,Équipes opérationnelles qui exécutent le travail en utilisant des méthodes agiles.,Component Team,Sous-domaine de N TEAMS,Équipe spécialisée dans un composant ou une technologie spécifique.,part of,"1. Expertise: Développer une expertise pointue.
+2. Standards: Définir les standards techniques.
+3. Support: Supporter les feature teams.
+4. Innovation: Proposer des améliorations techniques.
+5. Maintenance: Maintenir les composants critiques."
+N TEAMS,Domaine Principal,Équipes opérationnelles qui exécutent le travail en utilisant des méthodes agiles.,Hybrid Team,Sous-domaine de N TEAMS,Équipe combinant des aspects de feature et component teams selon les besoins.,part of,"1. Flexibilité: S'adapter aux besoins du projet.
+2. Balance: Équilibrer expertise et polyvalence.
+3. Coordination: Coordonner les différents aspects.
+4. Evolution: Faire évoluer l'organisation.
+5. Efficacité: Optimiser la production de valeur."
+
+PROGRAM,Domaine Principal,Niveau qui coordonne plusieurs équipes dans un Agile Release Train.,Agile Release Train,Sous-domaine de PROGRAM,Ensemble d'équipes agiles qui développent et délivrent des solutions ensemble.,coordinates,"1. Coordination: Synchroniser les équipes.
+2. Cadence: Maintenir un rythme de livraison.
+3. Integration: Assurer l'intégration continue.
+4. Qualité: Garantir la qualité globale.
+5. Valeur: Maximiser la valeur délivrée."
+PROGRAM,Domaine Principal,Niveau qui coordonne plusieurs équipes dans un Agile Release Train.,Value Streams,Sous-domaine de PROGRAM,Séquence d'activités nécessaires pour fournir de la valeur aux clients.,coordinates,"1. Identification: Cartographier les flux de valeur.
+2. Optimisation: Optimiser les processus.
+3. Mesure: Suivre les indicateurs de performance.
+4. Amélioration: Réduire les gaspillages.
+5. Alignement: Aligner les activités sur la valeur."
+PROGRAM,Domaine Principal,Niveau qui coordonne plusieurs équipes dans un Agile Release Train.,Release Management,Sous-domaine de PROGRAM,Processus de planification programmation et contrôle des releases logicielles.,coordinates,"1. Planification: Organiser les releases.
+2. Coordination: Coordonner les déploiements.
+3. Qualité: Assurer la qualité des releases.
+4. Communication: Informer les parties prenantes.
+5. Risques: Gérer les risques de déploiement."
+
+PORTFOLIO,Domaine Principal,Niveau stratégique qui définit la vision et gouvernance de l'organisation.,Vision stratégique et gouvernance,Sous-domaine de PORTFOLIO,Définition de la stratégie globale et des initiatives majeures de l'organisation.,consists of,"1. Vision: Définir la vision long terme.
+2. Stratégie: Élaborer la stratégie globale.
+3. Objectifs: Fixer les objectifs stratégiques.
+4. Gouvernance: Mettre en place la gouvernance.
+5. Innovation: Favoriser l'innovation stratégique."
+PORTFOLIO,Domaine Principal,Niveau stratégique qui définit la vision et gouvernance de l'organisation.,Gestion des investissements,Sous-domaine de PORTFOLIO,Priorisation des projets en fonction de leur valeur et gestion des budgets.,consists of,"1. Priorisation: Prioriser les investissements.
+2. Budget: Gérer les budgets.
+3. ROI: Évaluer le retour sur investissement.
+4. Risques: Gérer les risques financiers.
+5. Reporting: Suivre les indicateurs financiers."
+PORTFOLIO,Domaine Principal,Niveau stratégique qui définit la vision et gouvernance de l'organisation.,Alignement et gouvernance Lean,Sous-domaine de PORTFOLIO,Structure de gouvernance qui favorise l'autonomie tout en assurant l'alignement stratégique.,consists of,"1. Alignement: Assurer l'alignement stratégique.
+2. Autonomie: Favoriser l'autonomie des équipes.
+3. Principes: Appliquer les principes Lean.
+4. Décisions: Optimiser la prise de décision.
+5. Culture: Développer une culture Lean-Agile."
+
+# Relations entre domaines principaux
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,N TEAMS,Domaine Principal,,applies to,
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,GEM,Domaine Principal,,settings to,
+SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,ROLE,Domaine Principal,,defines roles for,
+
+ARTEFACT,Domaine Principal,,RITUAL,Domaine Principal,,contributes to,
+ARTEFACT,Domaine Principal,,N TEAMS,Domaine Principal,,produced by,
+ARTEFACT,Domaine Principal,,PROGRAM,Domaine Principal,,supports,
+
+RITUAL,Domaine Principal,,PROGRAM,Domaine Principal,,supports,
+RITUAL,Domaine Principal,,ROLE,Domaine Principal,,involves,
+RITUAL,Domaine Principal,,N TEAMS,Domaine Principal,,conducted by,
+
+GEM,Domaine Principal,,PORTFOLIO,Domaine Principal,,applies to,
+GEM,Domaine Principal,,N TEAMS,Domaine Principal,,guides,
+GEM,Domaine Principal,,SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,fosters,
+
+PORTFOLIO,Domaine Principal,,PROGRAM,Domaine Principal,,consists of,
+PORTFOLIO,Domaine Principal,,GEM,Domaine Principal,,embodies,
+
+N TEAMS,Domaine Principal,,PROGRAM,Domaine Principal,,part of,
+N TEAMS,Domaine Principal,,RITUAL,Domaine Principal,,conducts,
+N TEAMS,Domaine Principal,,ARTEFACT,Domaine Principal,,produces,
+N TEAMS,Domaine Principal,,SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,forms,
+N TEAMS,Domaine Principal,,GEM,Domaine Principal,,implements,
+
+PROGRAM,Domaine Principal,,PORTFOLIO,Domaine Principal,,contributes to,
+PROGRAM,Domaine Principal,,N TEAMS,Domaine Principal,,coordinates,
+PROGRAM,Domaine Principal,,RITUAL,Domaine Principal,,organizes,
+PROGRAM,Domaine Principal,,ARTEFACT,Domaine Principal,,utilizes,
+
+ROLE,Domaine Principal,,RITUAL,Domaine Principal,,participates in,
+ROLE,Domaine Principal,,SQUAD / COMMUNAUTÉS DE PRATIQUES,Domaine Principal,,belongs to 
