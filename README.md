@@ -219,3 +219,8 @@ Pour signaler une vulnérabilité de sécurité, veuillez :
 ## 📄 Licence
 
 Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails. 
+
+## Contact
+Créé par MrZzE00
+Email : mrzze.ai.things@gmail.com
+GitHub : @MrZzE00
